@@ -5,11 +5,16 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Here you can implement your login logic
-    console.log("Username:", username);
-    console.log("Password:", password);
+
+    const response = await fetch(
+      "https://epicode-deploy-be-d2ff11d62cad.herokuapp.com/auth/register",
+      {
+        method: "POST",
+        body: JSON.stringify({ username: username, password: password }),
+      }
+    );
   };
 
   return (
