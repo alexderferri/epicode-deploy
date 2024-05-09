@@ -1,16 +1,19 @@
+import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function Register() {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
 
     const response = await fetch(
-      "https://epicode-deploy-be-d2ff11d62cad.herokuapp.com/auth/login",
+      "https://epicode-deploy-be-d2ff11d62cad.herokuapp.com/auth/register",
       {
         method: "POST",
         body: JSON.stringify({
@@ -21,8 +24,7 @@ export default function Login() {
     );
 
     if (response.ok) {
-      const result = await response.json();
-      localStorage.setItem("token", result.token);
+      navigate("/");
     }
   };
 
@@ -30,8 +32,8 @@ export default function Login() {
     <Container>
       <Row className="justify-content-md-center">
         <Col md="4">
-          <h1>Login</h1>
-          <Form onSubmit={handleLogin}>
+          <h1>Registrati</h1>
+          <Form onSubmit={handleRegister}>
             <Form.Group controlId="formBasicUsername">
               <Form.Label>Username</Form.Label>
               <Form.Control
@@ -52,10 +54,10 @@ export default function Login() {
               />
             </Form.Group>
             <Button variant="primary" type="submit" className="mt-4">
-              Login
+              Registrati
             </Button>
           </Form>
-          <Link to="/register">Non hai un account? Registrati.</Link>
+          <Link to="/">Hai già un account? Login.</Link>
         </Col>
       </Row>
     </Container>
