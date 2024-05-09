@@ -12,6 +12,7 @@ export default function Login() {
     const response = await fetch(
       "https://epicode-deploy-be-d2ff11d62cad.herokuapp.com/auth/login",
       {
+        headers: { "Content-Type": "application/json" },
         method: "POST",
         body: JSON.stringify({
           username: username.toString(),
