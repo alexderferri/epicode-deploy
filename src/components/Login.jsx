@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContextProvider";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const { token, setToken } = useContext(AuthContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,8 +29,13 @@ export default function Login() {
     if (response.ok) {
       const result = await response.json();
       localStorage.setItem("token", result.token);
+      setToken(result.token);
     }
   };
+
+  useEffect(() => {
+    if (token !== "") navigate("/profile");
+  }, [token]);
 
   return (
     <Container>
