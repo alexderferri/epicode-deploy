@@ -9,16 +9,12 @@ export const AuthContext = createContext(null);
 export default function AuthContextProvider({ children }) {
   // Inizializziamo lo stato del componente di contesto
   // Lo stato rappresenterà il tema utilizzato dall'utente (chiaro o scuro)
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
     setAuthenticated(token !== "");
   }, [token]);
-
-  useEffect(() => {
-    setToken(localStorage.getItem("token") || "");
-  }, []);
 
   // Creiamo un oggetto con tutti i valori che verranno condivisi pubblicamente
   // con tutti i componenti che possono accedere al contesto
