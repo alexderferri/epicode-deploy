@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
+import LogoutButton from "./LogoutButton";
 
 export default function Profile() {
   return (
@@ -30,6 +31,7 @@ export default function Profile() {
               </li>
             </ul>
           </Card>
+          <LogoutButton />
         </Col>
       </Row>
     </Container>
