@@ -16,6 +16,10 @@ export default function AuthContextProvider({ children }) {
     setAuthenticated(token !== "");
   }, [token]);
 
+  useEffect(() => {
+    setToken(localStorage.getItem("token") || "");
+  }, []);
+
   // Creiamo un oggetto con tutti i valori che verranno condivisi pubblicamente
   // con tutti i componenti che possono accedere al contesto
   const value = {
